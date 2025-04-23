@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { v4 } from 'uuid';
 import data from '../assets/data';
-import { addToCart } from '../redux/redux';
+import { cartSlice } from '../redux/store.js';
 
 function OrderModal ({modalMenu, setModalOn}) {
     const dispatch = useDispatch();
@@ -39,7 +40,7 @@ function OrderModal ({modalMenu, setModalOn}) {
                             </div>
                             <button onClick={() => {
                                 // setCart([...cart, { options, quantity, id: modalMenu.id}])
-                                dispatch(addToCart(options, quantity, modalMenu.id))
+                                dispatch(cartSlice.actions.addToCart({options, quantity, menuId: modalMenu.id, id: v4()}))
                                 setModalOn(false)
                             }}>장바구니 넣기</button>
                         </div>
